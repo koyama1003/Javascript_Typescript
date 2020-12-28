@@ -1,18 +1,19 @@
-import React, { useState, FC, Dispatch, SetStateAction } from "react";
+import React, { useState, FC, useContext } from "react";
+import { AppContext } from "./App";
 type titleProps = {
   name: string;
-  setTodos: Dispatch<SetStateAction<{ title: string; body: string }[]>>;
-  todos: Todo[];
 };
 interface Todo {
   title: string;
   body: string;
 }
-const Element1: FC<titleProps> = ({ name, todos, setTodos }) => {
+const Element1: FC<titleProps> = ({ name }) => {
+  const { todos, setTodos } = useContext(AppContext);
+
   const [todo, setTodo] = useState<Todo>({ title: "", body: "" });
   const addNewTodo = (e: React.FormEvent) => {
     e.preventDefault();
-    setTodos([...todos, todo]);
+    setTodos!([...todos!, todo]);
     setTodo({ title: "", body: "" });
   };
   return (
