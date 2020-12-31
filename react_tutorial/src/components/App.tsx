@@ -7,6 +7,7 @@ function App() {
   const [stepNumber, setStepNumber] = useState(0);
   const [xIsNext, setXIsNext] = useState(true);
   const [finished, setFinished] = useState(false);
+  const sample = "testing";
 
   const handleClick = (i: number) => {
     if (finished) {
@@ -58,6 +59,7 @@ function App() {
       <li key={move}>
         {/* <button onClick={() => this.jumpTo(move)}>{desc}</button> */}
         <button onClick={() => jumpTo(move)}>{desc}</button>
+        {sample}
       </li>
     );
   });
