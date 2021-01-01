@@ -1,5 +1,4 @@
 {
-  // 適用する環境
   "env": {
     "es6": true,
     "node": true,
@@ -7,14 +6,14 @@
     "commonjs": true,
     "jest/globals": true
   },
-  // パーサー
+
   "parser": "@typescript-eslint/parser",
-  // jsx を使います
+
   "parserOptions": {
     "project": "./tsconfig.json",
     "ecmaFeatures": { "jsx": true }
   },
-  // React のバージョンは自動検出に
+
   "settings": {
     "react": {
       "version": "detect"
@@ -24,8 +23,7 @@
     }
   },
   "plugins": ["react-hooks", "react", "@typescript-eslint"],
-  // 基本的にルールは recommended に従う
-  // prettier 関連は配列の最後尾に書く
+
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -38,10 +36,9 @@
     "prettier/@typescript-eslint"
   ],
   "rules": {
-    // TypeScirpt なので prop-types は要らない
     "react/prop-types": "off"
   },
-  // .js ファイルをオーバーライド （webpack.conig.jsなど）
+
   "overrides": [
     {
       "files": ["*.js"],

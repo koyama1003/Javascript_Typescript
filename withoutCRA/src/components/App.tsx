@@ -1,13 +1,15 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-const App: FC = () => {
+const App: React.FC = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log('aaa');
+  };
+
   return (
-    <>
-      <div>aaaa</div>
-      <div>test App</div>
-      <div>aaa</div>
-    </>
+    <div className="App">
+      <button onClick={handleClick}>aaaa</button>
+    </div>
   );
 };
-
 export default App;
