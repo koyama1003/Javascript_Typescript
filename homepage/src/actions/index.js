@@ -1,0 +1,2 @@
+export const PAGINATION = 'PAGINATION'
+export const NAVIGATION = 'NAVIGATION'
