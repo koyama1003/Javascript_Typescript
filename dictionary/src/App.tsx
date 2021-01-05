@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import jishoApi from "unofficial-jisho-api";
 
@@ -7,14 +7,17 @@ const App: React.FC = () => {
   const proxy = "https://cors-anywhere.herokuapp.com/";
   const [word, setWord] = useState<string>("");
   const url_phrase = proxy + jisho.getUriForPhraseSearch(word);
-
-  const url_example = proxy + jisho.getUriForExampleSearch("令");
+  const url_example = proxy + jisho.getUriForExampleSearch(word);
 
   const searchExample = async () => {
-    const res = await axios.get(url_example);
+    try {
+      const resHtml = await axios.get(url_example);
 
-    const json = jisho.parseExamplePageHtml(res.data, "令");
-    console.log(json.results);
+      const res = jisho.parseExamplePageHtml(resHtml.data, word);
+      console.log(res.results);
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   const searchPhrase = async () => {
@@ -33,8 +36,8 @@ const App: React.FC = () => {
           setWord(e.target.value);
         }}
       />
-      <button onClick={searchPhrase}>search</button>
-      <button onClick={searchExample}>search</button>
+      <button onClick={searchPhrase}>Phrase</button>
+      <button onClick={searchExample}>Example</button>
     </div>
   );
 };
