@@ -1,0 +1,28 @@
+version: 0.2
+env:
+  parameter-store:
+    ACCOUNT_ID: "ACCOUNT_ID"
+    DEFAULT_REGION: "DEFAULT_REGION"
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region $DEFAULT_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - yarn install
+      - yarn test:ci
+      - docker build -t $ACCOUNT_ID.dkr.ecr.$DEFAULT_REGION.amazonaws.com/homepage:latest .
+      - docker push $ACCOUNT_ID.dkr.ecr.$DEFAULT_REGION.amazonaws.com/homepage:latest
+      - printf '{"Version":"1.0","ImageURI":"%s"}' $ACCOUNT_ID.dkr.ecr.$DEFAULT_REGION.amazonaws.com/homepage:latest > imageDetail.json
+reports:
+  jest_reports:
+    files:
+      - "testReports.xml"
+    file-format: JUNITXML
+    base-directory: "reports"
+artifacts:
+  files:
+    - imageDetail.json
+    - taskdef.json
+    - appspec.yaml
+  discard-paths: yes

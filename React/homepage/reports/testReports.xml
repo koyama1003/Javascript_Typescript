@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="6" failures="1" errors="0" time="16.923">
+  <testsuite name="Profile.js" errors="0" failures="0" skipped="0" timestamp="2021-01-15T05:07:47" time="10.69" tests="2">
+    <testcase classname="Profile.js should show all contents" name="Profile.js should show all contents" time="0.532">
+    </testcase>
+    <testcase classname=" should make pagination work correctly" name=" should make pagination work correctly" time="1.784">
+    </testcase>
+  </testsuite>
+  <testsuite name="Title.js" errors="0" failures="1" skipped="0" timestamp="2021-01-15T05:07:47" time="11.129" tests="2">
+    <testcase classname="Title.js should show all contents" name="Title.js should show all contents" time="0.165">
+    </testcase>
+    <testcase classname="Title.js should render avatar" name="Title.js should render avatar" time="0.071">
+      <failure>TestingLibraryElementError: Unable to find an element with the alt text: Sojiro Koyama
+
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;MuiTypography-root makeStyles-typography-9 MuiTypography-h1 MuiTypography-gutterBottom MuiTypography-alignCenter&quot;
+      data-testid=&quot;TitleAll&quot;
+    &gt;
+      My Portfolio
+      &lt;div
+        class=&quot;MuiBox-root MuiBox-root-10 makeStyles-titlebox-8&quot;
+      &gt;
+        -Thank you for visiting!-
+      &lt;/div&gt;
+      &lt;div
+        class=&quot;MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiAvatar-root MuiAvatar-circular makeStyles-avatar-6&quot;
+        &gt;
+          &lt;img
+            alt=&quot;My Portfolio&quot;
+            class=&quot;MuiAvatar-img&quot;
+            src=&quot;avatar.jpg&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (C:\Users\koyam\Desktop\homepage\node_modules\@testing-library\dom\dist\config.js:37:19)
+    at C:\Users\koyam\Desktop\homepage\node_modules\@testing-library\dom\dist\query-helpers.js:90:38
+    at C:\Users\koyam\Desktop\homepage\node_modules\@testing-library\dom\dist\query-helpers.js:62:17
+    at getByAltText (C:\Users\koyam\Desktop\homepage\node_modules\@testing-library\dom\dist\query-helpers.js:106:19)
+    at Object.&lt;anonymous&gt; (C:\Users\koyam\Desktop\homepage\src\tests\Title.test.js:16:27)
+    at Promise.then.completed (C:\Users\koyam\Desktop\homepage\node_modules\jest-circus\build\utils.js:276:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\koyam\Desktop\homepage\node_modules\jest-circus\build\utils.js:216:10)
+    at _callCircusTest (C:\Users\koyam\Desktop\homepage\node_modules\jest-circus\build\run.js:212:40)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at _runTest (C:\Users\koyam\Desktop\homepage\node_modules\jest-circus\build\run.js:149:3)
+    at _runTestsForDescribeBlock (C:\Users\koyam\Desktop\homepage\node_modules\jest-circus\build\run.js:63:9)
+    at _runTestsForDescribeBlock (C:\Users\koyam\Desktop\homepage\node_modules\jest-circus\build\run.js:57:9)
+    at run (C:\Users\koyam\Desktop\homepage\node_modules\jest-circus\build\run.js:25:3)
+    at runAndTransformResultsToJestFormat (C:\Users\koyam\Desktop\homepage\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:176:21)
+    at jestAdapter (C:\Users\koyam\Desktop\homepage\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:109:19)
+    at runTestInternal (C:\Users\koyam\Desktop\homepage\node_modules\jest-runner\build\runTest.js:380:16)
+    at runTest (C:\Users\koyam\Desktop\homepage\node_modules\jest-runner\build\runTest.js:472:34)
+    at Object.worker (C:\Users\koyam\Desktop\homepage\node_modules\jest-runner\build\testWorker.js:133:12)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Main.js" errors="0" failures="0" skipped="0" timestamp="2021-01-15T05:07:47" time="13.681" tests="2">
+    <testcase classname="Main.js should show all contents except title" name="Main.js should show all contents except title" time="0.57">
+    </testcase>
+    <testcase classname="Main.js Reducer test" name="Main.js Reducer test" time="0">
+    </testcase>
+    <testcase classname="Snapshot should preserve all contents" name="Snapshot should preserve all contents" time="0.17">
+    </testcase>
+  </testsuite>
+</testsuites>

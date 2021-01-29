@@ -1,0 +1,23 @@
+{
+  "executionRoleArn": "arn:aws:iam::697843701711:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "image": "<IMAGE1_NAME>",
+      "essential": true,
+      "name": "web"
+    }
+  ],
+  "memory": "512",
+  "taskRoleArn": null,
+  "family": "homepage-web",
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc",
+  "cpu": "256"
+}
