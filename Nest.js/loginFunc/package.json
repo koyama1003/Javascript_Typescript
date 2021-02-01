@@ -1,5 +1,5 @@
 {
-  "name": "tutorial",
+  "name": "todo-exm",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -23,8 +23,12 @@
   "dependencies": {
     "@nestjs/common": "^7.5.1",
     "@nestjs/core": "^7.5.1",
+    "@nestjs/mapped-types": "^0.3.0",
     "@nestjs/platform-express": "^7.5.1",
     "@nestjs/typeorm": "^7.1.5",
+    "class-transformer": "^0.3.2",
+    "class-validator": "^0.13.1",
+    "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
