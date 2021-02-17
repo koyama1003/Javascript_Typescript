@@ -1,9 +1,0 @@
-#Когда развернуть на ECS
-version: "3"
-services:
-  web:
-    build: ./
-    image: 697843701711.dkr.ecr.ap-northeast-1.amazonaws.com/homepage:latest
-    ports:
-      - "80:80"
-      - "8080:8080"
