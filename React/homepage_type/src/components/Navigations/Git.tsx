@@ -45,7 +45,7 @@ const Git: React.VFC<Props> = (props: Props) => {
     return () => {
       mounted = false;
     };
-  }, [fetchData]);
+  }, []);
 
   const [checked, setChecked] = useState(false);
 
@@ -86,13 +86,13 @@ const Git: React.VFC<Props> = (props: Props) => {
                 <TableRow hover={true}>
                   <TableCell align="center">
                     <a
-                      href={"https://github.com/" + item.repo.name}
+                      href={"https://github.com/" + item.repo?.name}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ paddingRight: 5 }}
                     >
                       <img
-                        src={item.actor.avatar_url}
+                        src={item.actor?.avatar_url}
                         alt="Github Avatar"
                         className={classes.smallAvatar}
                       />
@@ -105,7 +105,7 @@ const Git: React.VFC<Props> = (props: Props) => {
               <TableBody>
                 <TableRow hover={true}>
                   <TableCell align="center">
-                    {item.payload.commits ? (
+                    {item.payload?.commits ? (
                       <TrendingUpIcon />
                     ) : (
                       <CallMergeTwoToneIcon />

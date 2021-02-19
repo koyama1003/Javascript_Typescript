@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import AppContext from "../../contexts/AppContext";
 import {
   Grid,
@@ -35,7 +35,7 @@ const Overview = () => {
     };
   }, []);
 
-  const Navigation = () => {
+  const Navigation = useCallback(() => {
     switch (state.navigations) {
       case 1:
         return <Contacts />;
@@ -44,7 +44,7 @@ const Overview = () => {
       default:
         return <Git name="GitHub" />;
     }
-  };
+  }, [state.navigations]);
   const navChange = (e: React.ChangeEvent<{}>, nav: number) => {
     e.preventDefault();
     dispatch({ type: NAVIGATION, nav });

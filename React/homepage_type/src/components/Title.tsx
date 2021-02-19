@@ -71,9 +71,6 @@ const Title = () => {
           variant="circular"
         />
       </Grid>
-      {/*} <Grid container justify={"center"} className={classes.subtext}>
-        Sojiro Koyama
-  </Grid>    */}
     </Typography>
   );
 };
