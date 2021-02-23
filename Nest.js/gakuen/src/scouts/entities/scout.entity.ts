@@ -10,7 +10,7 @@ export default class Scout extends Base {
   status!: string;
   @Column()
   subject!: string;
-  @ManyToMany((type) => User, (user) => user.scouts, { cascade: true })
+  @ManyToMany(() => User, (user) => user.scouts, { cascade: true })
   @JoinTable({ name: 'scout_users' })
   users?: User[];
 }

@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Connection, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -7,6 +12,7 @@ import User from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
+  private users: User[] = [];
   constructor(
     @InjectRepository(User)
     private repository: Repository<User>,
@@ -42,22 +48,14 @@ export class UsersService {
     return found;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-    const user = await this.repository.findOne(+id);
-    if (!user) {
-      throw new NotFoundException();
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<User[]> {
+    const found = await this.repository.findOne(+id);
+    if (found) {
+      await this.repository.update(id, updateUserDto);
+      const updated = (await this.repository.findOne(+id)) ?? found;
+      return [found, updated];
     }
-    await this.repository.update(user, updateUserDto);
-    return user;
-  }
-
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    const index = this.posts.findIndex((post) => post.id === id);
-    if (postIndex > -1) {
-      this.posts[postIndex] = post;
-      return post;
-    }
-    throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
+    throw new HttpException('user not found', HttpStatus.NOT_FOUND);
   }
 
   async remove(id: number): Promise<void> {
