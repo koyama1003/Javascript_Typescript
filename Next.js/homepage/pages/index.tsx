@@ -18,18 +18,20 @@ import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import Layout from "../components/Layouts/Layout";
 import { NextPage } from "next";
-import { useDispatch, useSelector } from "react-redux";
 import useAnimation from "../hooks/useAnimation";
 import {
   navigationStates,
   changeNav,
 } from "../features/navigation/navigationSlice";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppSelector } from "../hooks/useAppSelector";
+
 const Index: NextPage = () => {
   const classes = useStyles();
   const [grow, setGrow] = useState(false);
   useAnimation(setGrow);
-  const dispatch = useDispatch();
-  const navigation = useSelector(navigationStates);
+  const dispatch = useAppDispatch();
+  const navigation = useAppSelector(navigationStates);
   const Navigation = useCallback(() => {
     switch (navigation.value) {
       case 1:

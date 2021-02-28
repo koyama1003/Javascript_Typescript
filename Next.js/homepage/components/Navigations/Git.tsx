@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import axios from "axios";
 import moment from "moment";
 import {
   Fade,
@@ -16,40 +15,18 @@ import {
 import CallMergeTwoToneIcon from "@material-ui/icons/CallMergeTwoTone";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import useAnimation from "../../hooks/useAnimation";
+import useGit from "../../hooks/useGit";
 
 interface Props {
   name: string;
 }
-interface Response {
-  id: number;
-  repo: { name: string };
-  created_at: Date;
-  actor: { avatar_url: string };
-  type: string;
-  payload: { commits: { message: string }[] };
-}
 
 const Git: React.VFC<Partial<Props>> = ({ name }) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
-  const fetchData = useCallback(async () => {
-    const result = await axios(
-      "https://api.github.com/users/koyama1003/events"
-    );
-    setData(result.data.slice(0, 5));
-  }, []);
-  useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      fetchData();
-    }
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
+  const { git } = useGit();
   const [checked, setChecked] = useState(false);
   useAnimation(setChecked);
+
   return (
     <>
       <Fade in={checked}>
@@ -68,7 +45,7 @@ const Git: React.VFC<Partial<Props>> = ({ name }) => {
           <Typography variant="h4" gutterBottom>
             Latest {name} Change
           </Typography>
-          {data.map((item: Response) => (
+          {git?.map((item) => (
             <Table size="small" key={item.id}>
               <TableHead>
                 <TableRow hover={true}>

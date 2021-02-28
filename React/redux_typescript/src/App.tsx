@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
+import useSWR, { mutate } from "swr";
+import axios from "axios";
 
 function App() {
+  const fetcher = async (url: string) => {
+    const res = await axios.get(url);
+    return res;
+  };
+  const { data, error } = useSWR(
+    "https://api.github.com/users/koyama1003",
+    fetcher,
+    { dedupingInterval: 5000 }
+  );
+  console.log(data);
+  console.log(error);
   return (
     <div className="App">
       <header className="App-header">
@@ -12,44 +25,14 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
+        <button
+          onClick={async () => {
+            mutate("https://api.github.com/users/koyama1003", data, false);
+            await fetcher("https://api.github.com/users/koyama1003");
+          }}
+        >
+          focus
+        </button>
       </header>
     </div>
   );

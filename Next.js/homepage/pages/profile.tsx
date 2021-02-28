@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, Card, CardContent, Typography, Slide } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import Layout from "../components/Layouts/Layout";
 import useAnimation from "../hooks/useAnimation";
 import { NextPage } from "next";
-import { useSelector, useDispatch } from "react-redux";
 import {
   changePage,
   paginationStates,
 } from "../features/pagination/paginationSlice";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppSelector } from "../hooks/useAppSelector";
 
 const Profile: NextPage = () => {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
-  const dispatch = useDispatch();
-  const page = useSelector(paginationStates);
+  const dispatch = useAppDispatch();
+  const page = useAppSelector(paginationStates);
   const pageChange = (e: React.ChangeEvent<unknown>, page: number) => {
     e.preventDefault();
     dispatch(changePage(Number(page) || 0));
   };
-  useEffect(() => {
-    console.log(page);
-  });
   useAnimation(setChecked);
 
   return (
