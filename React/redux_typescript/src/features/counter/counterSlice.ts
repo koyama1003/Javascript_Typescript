@@ -4,6 +4,7 @@ import {
   createAsyncThunk,
   Dispatch,
 } from "@reduxjs/toolkit";
+import axios, { AxiosResponse } from "axios";
 import { AppThunk, RootState } from "../../app/store";
 
 interface CounterState {
@@ -20,16 +21,16 @@ export type AsyncThunkConfig<T = unknown> = {
   extra: any;
   rejectValue: T;
 };
+const url = "https://api.github.com/users/koyama1003/events";
 
 export const asyncIncrement = createAsyncThunk<
-  number,
+  AxiosResponse<any>,
   undefined,
   AsyncThunkConfig<{ errorMessage: string }>
->("asyncIncrement", async (arg, thunkAPI) => {
-  console.log(arg);
-  const res = await thunkAPI.getState().counter.value;
+>("asyncIncrement", async (_arg, _thunkAPI) => {
+  const res = await axios.get(url);
   console.log(res);
-  return res;
+  return res.data;
 });
 
 export const counterSlice = createSlice({
@@ -52,12 +53,19 @@ export const counterSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(asyncIncrement.pending, (state, action) => {
+      console.log("phase pending");
+      console.log("action payload is " + action.payload);
+    });
+    builder.addCase(asyncIncrement.rejected, (state, action) => {
+      console.log("rejected");
+    });
+
     builder.addCase(asyncIncrement.fulfilled, (state, action) => {
-      console.log(state);
-      return state;
+      console.log("phase finished");
+      console.log("action payload is " + action.payload);
     });
   },
-  //  },
 });
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;

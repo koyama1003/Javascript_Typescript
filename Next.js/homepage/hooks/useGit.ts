@@ -1,30 +1,19 @@
 import axios from "axios";
-import useSWR, { responseInterface } from "swr";
-
-interface data {
-  id: number;
-  repo: { name: string };
-  created_at: Date;
-  actor: { avatar_url: string };
-  type: string;
-  payload: { commits: { message: string }[] };
-}
-
-interface Response extends data {
-  data: {
-    slice: <T, U>(arg1: T, arg2: U) => data[];
-  };
-}
+import useSWR from "swr";
+import { Response } from "../features/git/gitSlice";
+import { gitFetch } from "../features/git/gitSlice";
+import { useAppDispatch } from "./useAppDispatch";
 
 const useGit = () => {
   const url = "https://api.github.com/users/koyama1003/events";
+  const dispatch = useAppDispatch();
+  dispatch(gitFetch(url));
   const fetcher = (): Promise<Response> => axios.get(url);
-  const { data, error }: responseInterface<Response, Error> = useSWR(
-    url,
-    fetcher
-  );
+  const { data, error } = useSWR(url, fetcher);
+  const git = data?.data?.slice(0, 5);
+
   return {
-    git: data?.data?.slice(0, 5),
+    git,
     isLoading: !error && data,
     isError: error,
   };

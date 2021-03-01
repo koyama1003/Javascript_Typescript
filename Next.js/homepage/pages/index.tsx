@@ -46,6 +46,7 @@ const Index: NextPage = () => {
     e.preventDefault();
     dispatch(changeNav(nav));
   };
+
   return (
     <Layout>
       <Grid container spacing={1}>
